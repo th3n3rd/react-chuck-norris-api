@@ -3,10 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import {ChuckNorrisApiProvider} from "./components/ChuckNorrisApiContext";
+import {ChuckNorrisApiClient} from "./components/ChuckNorrisApi";
+
+const apiClient = new ChuckNorrisApiClient("https://api.chucknorris.io")
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ChuckNorrisApiProvider apiClient={apiClient}>
+        <App />
+    </ChuckNorrisApiProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

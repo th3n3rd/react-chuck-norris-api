@@ -40,5 +40,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "jest-mock-extended": "^1.0.15",
+    "msw": "^0.29.0"
   }
 }
