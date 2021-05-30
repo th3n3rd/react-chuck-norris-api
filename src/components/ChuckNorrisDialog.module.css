@@ -1,0 +1,16 @@
+.dialog {
+    background: #ebf5ff;
+    color: black;
+    border: 5px solid #5e7b97;
+    font-size: 20px;
+    font-smooth: never;
+    -webkit-font-smoothing: none;
+    font-family: "pokemon-font", monospace;
+    width: 960px;
+    margin: 30px;
+    padding: 20px;
+    text-align: justify;
+    line-height: 30px;
+    word-break: break-word;
+    border-radius: 15px;
+}
