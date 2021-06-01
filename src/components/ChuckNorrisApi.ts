@@ -15,6 +15,9 @@ export class ChuckNorrisApiClient implements ChuckNorrisApi {
 
     async randomJoke() : Promise<Joke> {
         const response = await fetch(`${this.baseUrl}/jokes/random`)
+        if (!response.ok) {
+            throw new Error("Unable to fetch a random joke")
+        }
         return await response.json() as Joke
     }
 }

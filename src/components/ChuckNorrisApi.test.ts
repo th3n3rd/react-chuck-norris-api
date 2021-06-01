@@ -21,6 +21,11 @@ describe("ChuckNorrisApiClient", () => {
             })
             await thenRandomJokeResolves({ value: "How many push-ups can Chuck Norris do? All of them." })
         })
+
+        it("throws an error after a failed GET request", async () => {
+            givenRandomJokesApiFails();
+            await thenRandomJokeRejectsAndThrows();
+        })
     })
 
     const givenRandomJokesApiResponds = (response: any) => {
@@ -29,7 +34,17 @@ describe("ChuckNorrisApiClient", () => {
         }))
     }
 
+    const givenRandomJokesApiFails = () => {
+        apiServer.use(rest.get("http://localhost:5000/jokes/random", (req, resp, ctx) => {
+            return resp(ctx.status(503, "Service Unavailable"))
+        }))
+    }
+
     const thenRandomJokeResolves = async (joke: Joke) => {
         await expect(apiClient.randomJoke()).resolves.toMatchObject(joke)
+    }
+
+    const thenRandomJokeRejectsAndThrows = async () => {
+        await expect(apiClient.randomJoke()).rejects.toThrow("Unable to fetch a random joke")
     }
 })

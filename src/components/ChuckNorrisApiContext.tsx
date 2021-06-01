@@ -1,5 +1,5 @@
 import React, {createContext, useContext} from "react";
-import {ChuckNorrisApi, ChuckNorrisApiClient} from "./ChuckNorrisApi";
+import {ChuckNorrisApi} from "./ChuckNorrisApi";
 
 const ChuckNorrisContext = createContext<ChuckNorrisApi | undefined>(undefined)
 
