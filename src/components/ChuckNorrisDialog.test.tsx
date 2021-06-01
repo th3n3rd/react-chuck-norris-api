@@ -12,6 +12,11 @@ describe("ChuckNorrisDialog", () => {
 
     beforeEach(async () => {
         apiClient = mock<ChuckNorrisApi>()
+        givenTimeCanBeControlled()
+    })
+
+    afterEach(() => {
+        timeIsRestored()
     })
 
     describe("when mounted", () => {
@@ -25,6 +30,7 @@ describe("ChuckNorrisDialog", () => {
         })
 
         it("displays a joke", async () => {
+            typewriterHasFinished();
             await thenJokeIsDisplayed("Chuck Norris doesn't read books. He stares them down until he gets the information he wants.")
         })
 
@@ -46,6 +52,7 @@ describe("ChuckNorrisDialog", () => {
         })
 
         it("displays the received joke by replacing the previous one", async () => {
+            typewriterHasFinished();
             await thenJokeIsDisplayed("How many push-ups can Chuck Norris do? All of them.")
             await thenJokeIsNotDisplayed("Chuck Norris doesn't read books. He stares them down until he gets the information he wants.")
         })
@@ -78,6 +85,7 @@ describe("ChuckNorrisDialog", () => {
 
             it("displays the received joke by replacing the previous error", async () => {
                 await thenNoErrorIsDisplayed();
+                typewriterHasFinished();
                 await thenJokeIsDisplayed("Chuck Norris can make Jenny leave the Block.")
             })
 
@@ -87,6 +95,10 @@ describe("ChuckNorrisDialog", () => {
             })
         })
     })
+
+    const givenTimeCanBeControlled = () => {
+        jest.useFakeTimers();
+    }
 
     const givenRandomJokesApiResolves = (joke: Joke) => {
         apiClient.randomJoke.mockResolvedValueOnce(joke)
@@ -104,6 +116,14 @@ describe("ChuckNorrisDialog", () => {
                 </ChuckNorrisApiProvider>
             )
         })
+    }
+
+    const timeIsRestored = () => {
+        jest.useRealTimers()
+    }
+
+    const typewriterHasFinished = () => {
+        jest.advanceTimersByTime(10_000)
     }
 
     const nextButton = async () => {
