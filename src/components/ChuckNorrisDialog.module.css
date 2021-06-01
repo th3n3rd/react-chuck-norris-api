@@ -1,11 +1,19 @@
-.dialog {
-    background: #ebf5ff;
-    color: black;
-    border: 5px solid #5e7b97;
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.container * {
     font-size: 20px;
     font-smooth: never;
     -webkit-font-smoothing: none;
     font-family: "pokemon-font", monospace;
+}
+
+.dialog {
+    background: #ebf5ff;
+    color: black;
+    border: 5px solid #5e7b97;
     width: 960px;
     margin: 30px;
     padding: 20px;
@@ -13,4 +21,28 @@
     line-height: 30px;
     word-break: break-word;
     border-radius: 15px;
+}
+
+.button {
+    background: #5e7b97;
+    color: #ebf5ff;
+    border: 5px solid transparent;
+    margin: 0 30px;
+    padding: 10px;
+    border-radius: 5px;
+    align-self: flex-end;
+}
+
+.button:hover {
+    background: #50687d;
+    cursor: pointer;
+}
+
+.button:active {
+    border: 5px solid #a8c3dd;
+    cursor: pointer;
+}
+
+.button:focus {
+    outline: none;
 }

@@ -1,16 +1,23 @@
-import React, {useEffect, useState} from "react";
-import styles from "./ChuckNorrisDialog.module.css"
+import React, {useCallback, useEffect, useState} from "react";
+import styles from "./ChuckNorrisDialog.module.css";
 import {useChuckNorrisApi} from "./ChuckNorrisApiContext";
 
 export const ChuckNorrisDialog = () => {
     const apiClient = useChuckNorrisApi()
     const [randomJoke, setRandomJoke] = useState("")
 
-    useEffect(() => {
+    const nextRandomJoke = useCallback(() => {
         apiClient
             .randomJoke()
             .then(joke => setRandomJoke(joke.value))
-    }, [apiClient])
+    }, [apiClient]);
 
-    return <div className={styles.dialog}>{randomJoke}</div>
+    useEffect(() => {
+        nextRandomJoke()
+    }, [nextRandomJoke])
+
+    return <div className={styles.container}>
+        <span className={styles.dialog}>{randomJoke}</span>
+        <button className={styles.button} onClick={() => nextRandomJoke()}>Next</button>
+    </div>
 }
